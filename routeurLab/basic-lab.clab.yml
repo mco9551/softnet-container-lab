@@ -1,0 +1,31 @@
+name: router-lab
+topology:
+  nodes:
+    hs1:
+      kind: linux
+      image: clab-ubuntu-softnet:latest
+      binds:
+        - configs/hs1.cfg:/etc/nodes/hs1.cfg
+        - bin/entrypoint.sh:/entrypoint.sh
+      exec:
+        - bash /entrypoint.sh
+    rt1:
+      kind: linux
+      image: clab-ubuntu-softnet:latest
+      binds:
+        - configs/rt1.cfg:/etc/nodes/rt1.cfg
+        - bin/entrypoint.sh:/entrypoint.sh
+      exec:
+        - bash /entrypoint.sh
+    hs2:
+      kind: linux
+      image: clab-ubuntu-softnet:latest
+      binds:
+        - configs/hs2.cfg:/etc/nodes/hs2.cfg
+        - bin/entrypoint.sh:/entrypoint.sh
+      exec:
+        - bash /entrypoint.sh
+
+  links:
+    - endpoints: ["hs1:eth1", "rt1:eth1"]
+    - endpoints: ["hs2:eth1", "rt1:eth2"]
