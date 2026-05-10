@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --chmod=755 bin/entrypoint.sh /entrypoint.sh
 
 LABEL maintainer="clab-softnet-project"
 LABEL description="Ubuntu 24.04 custom image for containerlab nodes with basic networking"
