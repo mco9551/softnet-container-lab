@@ -1,0 +1,24 @@
+name: e6-dns-latency
+
+topology:
+  defaults:
+    kind: linux
+    image: clab-softnet-e6:latest
+
+  nodes:
+    client:
+      binds:
+        - configs/client.cfg:/etc/nodes/client.cfg:ro
+      exec:
+        - bash /entrypoint.sh
+
+    dns-server:
+      binds:
+        - configs/dns-server.cfg:/etc/nodes/dns-server.cfg:ro
+      exec:
+        - bash /entrypoint.sh
+
+  links:
+    - endpoints:
+        - client:eth1
+        - dns-server:eth1
